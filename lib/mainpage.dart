@@ -14,12 +14,37 @@ class _MainPageState extends State<MainPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        backgroundColor: Colors.red[800],
+        centerTitle: true,
         title: Text(
           "Expenses Log",
-          style: GoogleFonts.oxygen(
+          style: GoogleFonts.quicksand(
             color: Colors.white,
-            fontSize: screenUtil.setSp(20),
+            fontSize: screenUtil.setSp(18),
             fontWeight: FontWeight.w600,
+          ),
+        ),
+      ),
+      body: SingleChildScrollView(
+        // physics: ScrollPhysics(),
+        child: Container(
+          margin: EdgeInsets.symmetric(
+            horizontal: screenUtil.setWidth(20),
+          ),
+          child: ListView.builder(
+            physics: ScrollPhysics(),
+            shrinkWrap: true,
+            itemCount: 10,
+            itemBuilder: (context, index) {
+              return Container(
+                height: screenUtil.setHeight(70),
+                width: screenUtil.screenWidth,
+                margin: EdgeInsets.symmetric(
+                  vertical: screenUtil.setHeight(10),
+                ),
+                decoration: BoxDecoration(color: Colors.red.shade200),
+              );
+            },
           ),
         ),
       ),
