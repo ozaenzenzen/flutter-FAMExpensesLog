@@ -1,8 +1,10 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_fam_expenseslog/page/addpage.dart';
 import 'package:flutter_fam_expenseslog/utils/fam_strings.dart';
 import 'package:flutter_fam_expenseslog/widget/expenselog_item.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class MainPage extends StatefulWidget {
@@ -62,10 +64,11 @@ class _MainPageState extends State<MainPage> {
           size: screenUtil.setSp(25),
         ),
         onPressed: () {
-          //
+          Get.to(
+            () => AddPage(),
+          );
         },
       ),
     );
   }
 }
-
