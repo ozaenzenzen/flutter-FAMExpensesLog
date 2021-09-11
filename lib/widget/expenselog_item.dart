@@ -42,15 +42,10 @@ class ExpensesLogItem extends StatelessWidget {
         child: Row(
           // mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Container(
-              margin: EdgeInsets.only(
-                left: screenUtil.setWidth(10),
-              ),
-              child: Icon(
-                CupertinoIcons.app_fill,
-                size: screenUtil.setSp(60),
-                color: Colors.grey.shade400,
-              ),
+            Icon(
+              CupertinoIcons.app_fill,
+              size: screenUtil.setSp(60),
+              color: Colors.grey.shade400,
             ),
             SizedBox(
               width: screenUtil.setWidth(10),
