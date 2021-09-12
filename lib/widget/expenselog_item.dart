@@ -23,6 +23,7 @@ class ExpensesLogItem extends StatelessWidget {
         vertical: screenUtil.setHeight(10),
       ),
       decoration: BoxDecoration(
+        borderRadius: BorderRadius.circular(8),
         color: Colors.white,
         // color: Colors.red.shade200,
         boxShadow: [
