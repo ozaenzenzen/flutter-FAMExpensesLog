@@ -27,10 +27,10 @@ class ExpensesLogItem extends StatelessWidget {
         // color: Colors.red.shade200,
         boxShadow: [
           BoxShadow(
-            offset: Offset(0, 1),
-            color: Colors.red.shade200,
-            spreadRadius: 0.5,
-            blurRadius: 7,
+            offset: Offset(0, 3),
+            color: Colors.red.shade100,
+            spreadRadius: 1,
+            blurRadius: 8,
           ),
         ],
       ),
@@ -44,7 +44,7 @@ class ExpensesLogItem extends StatelessWidget {
           children: [
             Icon(
               CupertinoIcons.app_fill,
-              size: screenUtil.setSp(60),
+              size: screenUtil.setSp(100),
               color: Colors.grey.shade400,
             ),
             SizedBox(
