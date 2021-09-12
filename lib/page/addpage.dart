@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_fam_expenseslog/model/expense_model.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:intl/intl.dart';
@@ -9,7 +10,12 @@ class AddPage extends StatefulWidget {
 }
 
 class _AddPageState extends State<AddPage> {
+  ExpenseModel expenseModel = ExpenseModel();
+
   ScreenUtil screenUtil = ScreenUtil();
+
+  TextEditingController titleController = TextEditingController();
+  TextEditingController descController = TextEditingController();
   TextEditingController dateController = TextEditingController();
 
   @override
@@ -49,6 +55,7 @@ class _AddPageState extends State<AddPage> {
                   height: screenUtil.setHeight(5),
                 ),
                 TextField(
+                  controller: titleController,
                   decoration: InputDecoration(
                     labelText: "Expense Title",
                     labelStyle: GoogleFonts.quicksand(
@@ -79,6 +86,7 @@ class _AddPageState extends State<AddPage> {
                   height: screenUtil.setHeight(5),
                 ),
                 TextField(
+                  controller: descController,
                   decoration: InputDecoration(
                     labelText: "Expense Desc",
                     labelStyle: GoogleFonts.quicksand(
@@ -157,7 +165,19 @@ class _AddPageState extends State<AddPage> {
                   ),
                 ),
                 onPressed: () {
-                  //
+                  if (expenseModel == null) {
+                    // tambah data
+                    expenseModel = ExpenseModel(
+                      title: titleController.text,
+                      desc: descController.text,
+                      date: dateController.text,
+                    );
+                  } else {
+                    // ubah data
+                    expenseModel.title = titleController.text;
+                    expenseModel.desc = descController.text;
+                    expenseModel.date = dateController.text;
+                  }
                 },
                 child: Text(
                   "Add Log!",
