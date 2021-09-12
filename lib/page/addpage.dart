@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:intl/intl.dart';
 
 class AddPage extends StatefulWidget {
   @override
@@ -9,6 +10,8 @@ class AddPage extends StatefulWidget {
 
 class _AddPageState extends State<AddPage> {
   ScreenUtil screenUtil = ScreenUtil();
+  TextEditingController dateController = TextEditingController();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -88,12 +91,58 @@ class _AddPageState extends State<AddPage> {
                 ),
               ],
             ),
-            // showDatePicker(
-            //   context: context,
-            //   initialDate: DateTime.now(),
-            //   firstDate: DateTime(2019, 1),
-            //   lastDate: DateTime(2021, 12),
-            // ),
+            SizedBox(
+              height: screenUtil.setHeight(15),
+            ),
+            Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  "Date Time",
+                  style: GoogleFonts.quicksand(
+                    color: Colors.black,
+                    fontSize: screenUtil.setSp(12),
+                    fontWeight: FontWeight.w500,
+                  ),
+                ),
+                SizedBox(
+                  height: screenUtil.setHeight(5),
+                ),
+                GestureDetector(
+                  onTap: () {
+                    setState(() {
+                      showDatePicker(
+                        context: context,
+                        initialDate: DateTime.now(),
+                        firstDate: DateTime(2019, 1),
+                        lastDate: DateTime(2021, 12),
+                      ).then((value) {
+                        dateController.text =
+                            DateFormat('EEEE, dd MMMM yyyy').format(value!);
+                      });
+                    });
+                  },
+                  child: AbsorbPointer(
+                    child: TextField(
+                      controller: dateController,
+                      decoration: InputDecoration(
+                        suffixIcon: Icon(
+                          Icons.calendar_today_rounded,
+                          size: screenUtil.setSp(20),
+                        ),
+                        labelText: "Date Time",
+                        labelStyle: GoogleFonts.quicksand(
+                          color: Colors.grey,
+                          fontSize: screenUtil.setSp(12),
+                          fontWeight: FontWeight.w500,
+                        ),
+                        border: OutlineInputBorder(),
+                      ),
+                    ),
+                  ),
+                ),
+              ],
+            ),
             SizedBox(
               height: screenUtil.setHeight(25),
             ),
