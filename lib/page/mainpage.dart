@@ -20,6 +20,7 @@ class _MainPageState extends State<MainPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        elevation: 0,
         backgroundColor: Colors.red[800],
         centerTitle: true,
         title: Text(
@@ -55,7 +56,7 @@ class _MainPageState extends State<MainPage> {
         label: Text(
           "Add Log",
           style: GoogleFonts.quicksand(
-            fontSize: screenUtil.setSp(15),
+            fontSize: screenUtil.setSp(13),
             fontWeight: FontWeight.w600,
           ),
         ),
