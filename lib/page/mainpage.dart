@@ -1,6 +1,8 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_fam_expenseslog/model/expense_model.dart';
 import 'package:flutter_fam_expenseslog/page/addpage.dart';
+import 'package:flutter_fam_expenseslog/services/db_helper.dart';
 import 'package:flutter_fam_expenseslog/utils/fam_strings.dart';
 import 'package:flutter_fam_expenseslog/widget/expenselog_item.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -13,11 +15,18 @@ class MainPage extends StatefulWidget {
 }
 
 class _MainPageState extends State<MainPage> {
+  DBHelper dbHelper = DBHelper();
+  int count = 0;
+  List<ExpenseModel>? expenseList; 
+
   ScreenUtil screenUtil = ScreenUtil();
   FAMStrings famStrings = FAMStrings();
 
   @override
   Widget build(BuildContext context) {
+    if(expenseList == null){
+      expenseList = <ExpenseModel>[];
+    }
     return Scaffold(
       appBar: AppBar(
         elevation: 0,
