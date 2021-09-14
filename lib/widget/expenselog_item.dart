@@ -17,7 +17,6 @@ class ExpensesLogItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      // height: screenUtil.setHeight(70),
       width: screenUtil.screenWidth,
       margin: EdgeInsets.symmetric(
         vertical: screenUtil.setHeight(10),
