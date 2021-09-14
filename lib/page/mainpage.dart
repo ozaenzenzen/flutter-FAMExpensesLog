@@ -17,14 +17,14 @@ class MainPage extends StatefulWidget {
 class _MainPageState extends State<MainPage> {
   DBHelper dbHelper = DBHelper();
   int count = 0;
-  List<ExpenseModel>? expenseList; 
+  List<ExpenseModel>? expenseList;
 
   ScreenUtil screenUtil = ScreenUtil();
   FAMStrings famStrings = FAMStrings();
 
   @override
   Widget build(BuildContext context) {
-    if(expenseList == null){
+    if (expenseList == null) {
       expenseList = <ExpenseModel>[];
     }
     return Scaffold(
@@ -42,7 +42,6 @@ class _MainPageState extends State<MainPage> {
         ),
       ),
       body: SingleChildScrollView(
-        // physics: ScrollPhysics(),
         child: Container(
           margin: EdgeInsets.symmetric(
             horizontal: screenUtil.setWidth(20),
