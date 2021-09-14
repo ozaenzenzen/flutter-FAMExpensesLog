@@ -130,22 +130,20 @@ class _AddPageState extends State<AddPage> {
                       });
                     });
                   },
-                  child: AbsorbPointer(
-                    child: TextField(
-                      controller: dateController,
-                      decoration: InputDecoration(
-                        suffixIcon: Icon(
-                          Icons.calendar_today_rounded,
-                          size: screenUtil.setSp(20),
-                        ),
-                        labelText: "Date Time",
-                        labelStyle: GoogleFonts.quicksand(
-                          color: Colors.grey,
-                          fontSize: screenUtil.setSp(12),
-                          fontWeight: FontWeight.w500,
-                        ),
-                        border: OutlineInputBorder(),
+                  child: TextField(
+                    controller: dateController,
+                    decoration: InputDecoration(
+                      suffixIcon: Icon(
+                        Icons.calendar_today_rounded,
+                        size: screenUtil.setSp(20),
                       ),
+                      labelText: "Date Time",
+                      labelStyle: GoogleFonts.quicksand(
+                        color: Colors.grey,
+                        fontSize: screenUtil.setSp(12),
+                        fontWeight: FontWeight.w500,
+                      ),
+                      border: OutlineInputBorder(),
                     ),
                   ),
                 ),
