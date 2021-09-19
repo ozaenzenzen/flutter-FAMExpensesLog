@@ -163,19 +163,19 @@ class _AddPageState extends State<AddPage> {
                   ),
                 ),
                 onPressed: () {
-                  if (expenseModel == null) {
-                    // tambah data
-                    expenseModel = ExpenseModel(
-                      title: titleController.text,
-                      desc: descController.text,
-                      date: dateController.text,
-                    );
-                  } else {
-                    // ubah data
-                    expenseModel.title = titleController.text;
-                    expenseModel.desc = descController.text;
-                    expenseModel.date = dateController.text;
-                  }
+                  // if (expenseModel == null) {
+                  //   // tambah data
+                  //   expenseModel = ExpenseModel(
+                  //     title: titleController.text,
+                  //     desc: descController.text,
+                  //     date: dateController.text,
+                  //   );
+                  // } else {
+                  //   // ubah data
+                  //   expenseModel.title = titleController.text;
+                  //   expenseModel.desc = descController.text;
+                  //   expenseModel.date = dateController.text;
+                  // }
                 },
                 child: Text(
                   "Add Log!",
