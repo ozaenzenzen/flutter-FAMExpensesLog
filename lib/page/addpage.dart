@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_fam_expenseslog/model/expense_model.dart';
+import 'package:flutter_fam_expenseslog/page/mainpage.dart';
+import 'package:flutter_fam_expenseslog/services/db_provider.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:intl/intl.dart';
 
@@ -130,20 +133,22 @@ class _AddPageState extends State<AddPage> {
                       });
                     });
                   },
-                  child: TextField(
-                    controller: dateController,
-                    decoration: InputDecoration(
-                      suffixIcon: Icon(
-                        Icons.calendar_today_rounded,
-                        size: screenUtil.setSp(20),
+                  child: AbsorbPointer(
+                    child: TextField(
+                      controller: dateController,
+                      decoration: InputDecoration(
+                        suffixIcon: Icon(
+                          Icons.calendar_today_rounded,
+                          size: screenUtil.setSp(20),
+                        ),
+                        labelText: "Date Time",
+                        labelStyle: GoogleFonts.quicksand(
+                          color: Colors.grey,
+                          fontSize: screenUtil.setSp(12),
+                          fontWeight: FontWeight.w500,
+                        ),
+                        border: OutlineInputBorder(),
                       ),
-                      labelText: "Date Time",
-                      labelStyle: GoogleFonts.quicksand(
-                        color: Colors.grey,
-                        fontSize: screenUtil.setSp(12),
-                        fontWeight: FontWeight.w500,
-                      ),
-                      border: OutlineInputBorder(),
                     ),
                   ),
                 ),
@@ -162,7 +167,17 @@ class _AddPageState extends State<AddPage> {
                     screenUtil.setHeight(40),
                   ),
                 ),
-                onPressed: () {
+                onPressed: () async {
+                  var expenseModel = ExpenseModel(
+                    title: titleController.text,
+                    desc: descController.text,
+                    date: dateController.text,
+                  );
+
+                  await DBProvider.dbProvider.insertData(expenseModel);
+
+                  Get.to(() => MainPage(), transition: Transition.leftToRight);
+
                   // if (expenseModel == null) {
                   //   // tambah data
                   //   expenseModel = ExpenseModel(
