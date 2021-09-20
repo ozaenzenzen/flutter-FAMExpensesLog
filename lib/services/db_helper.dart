@@ -43,20 +43,21 @@ class DBHelper {
     return _database!;
   }
 
+  // read database
   Future<List<Map<String, dynamic>>> select() async {
     Database db = await this.database;
     var mapList = await db.query('expense', orderBy: 'title');
     return mapList;
   }
 
-//create databases
+  //create databases
   Future<int> insert(ExpenseModel object) async {
     Database db = await this.database;
     int count = await db.insert('expense', object.toJson());
     return count;
   }
 
-//update databases
+  //update databases
   Future<int> update(ExpenseModel object) async {
     Database db = await this.database;
     int count = await db.update('expense', object.toJson(),
@@ -64,7 +65,7 @@ class DBHelper {
     return count;
   }
 
-//delete databases
+  //delete databases
   Future<int> delete(int id) async {
     Database db = await this.database;
     int count = await db.delete('expense', where: 'id=?', whereArgs: [id]);
