@@ -43,14 +43,14 @@ class DBProvider {
     );
   }
 
-  createDB2(ExpenseModel expenseModel) async {
+  insertData2(ExpenseModel expenseModel) async {
     final db = await database;
     var res = await db.rawInsert("INSERT into expense2 (title, desc, date)"
         "VALUES (${expenseModel.title}, ${expenseModel.desc}, ${expenseModel.date})");
     return res;
   }
 
-  createDB(ExpenseModel expenseModel) async {
+  insertData(ExpenseModel expenseModel) async {
     final db = await database;
     var res = await db.insert("expense2", expenseModel.toJson());
     return res;
