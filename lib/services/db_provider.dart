@@ -37,7 +37,7 @@ class DBProvider {
             "id INTEGER PRIMARY KEY AUTOINCREMENT,"
             "title TEXT,"
             "desc TEXT,"
-            "date DATETIME,"
+            "date DATETIME"
             ")");
       },
     );
@@ -62,7 +62,7 @@ class DBProvider {
     return res.isNotEmpty ? ExpenseModel.fromMap(res.first) : null;
   }
 
-  selectAllData() async {
+  Future<List<ExpenseModel>> selectAllData() async {
     final db = await database;
     var res = await db.query("expense2");
     List<ExpenseModel> dataAll =
