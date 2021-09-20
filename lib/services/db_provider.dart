@@ -55,4 +55,35 @@ class DBProvider {
     var res = await db.insert("expense2", expenseModel.toJson());
     return res;
   }
+
+  selectData(int id) async {
+    final db = await database;
+    var res = await db.query("expense2", where: "id = ?", whereArgs: [id]);
+    return res.isNotEmpty ? ExpenseModel.fromMap(res.first) : null;
+  }
+
+  selectAllData() async {
+    final db = await database;
+    var res = await db.query("expense2");
+    List<ExpenseModel> dataAll =
+        res.isNotEmpty ? res.map((e) => ExpenseModel.fromMap(e)).toList() : [];
+    return dataAll;
+  }
+
+  updateData(ExpenseModel expenseModel) async {
+    final db = await database;
+    var res = await db.update("expense2", expenseModel.toJson(),
+        where: "id = ?", whereArgs: [expenseModel.id]);
+    return res;
+  }
+
+  deleteData(int id) async {
+    final db = await database;
+    db.delete("expense2", where: "id = ?", whereArgs: [id]);
+  }
+
+  deleteAllData() async {
+    final db = await database;
+    db.rawDelete("Delete * from expense2");
+  }
 }
