@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_fam_expenseslog/model/expense_model.dart';
 import 'package:flutter_fam_expenseslog/page/addpage.dart';
 import 'package:flutter_fam_expenseslog/services/db_helper.dart';
+import 'package:flutter_fam_expenseslog/services/db_provider.dart';
 import 'package:flutter_fam_expenseslog/utils/fam_strings.dart';
 import 'package:flutter_fam_expenseslog/widget/expenselog_item.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -46,17 +47,36 @@ class _MainPageState extends State<MainPage> {
           margin: EdgeInsets.symmetric(
             horizontal: screenUtil.setWidth(20),
           ),
-          child: ListView.builder(
-            physics: ScrollPhysics(),
-            shrinkWrap: true,
-            itemCount: 10,
-            itemBuilder: (context, index) {
-              return ExpensesLogItem(
-                index: index,
-                screenUtil: screenUtil,
-              );
-            },
-          ),
+          child: FutureBuilder(
+              future: DBProvider.dbProvider.selectAllData(),
+              builder: (BuildContext context, AsyncSnapshot<List<ExpenseModel>> snapshot) {
+                print(snapshot.data);
+                if (snapshot.hasData) {
+                  return ListView.builder(
+                    physics: ScrollPhysics(),
+                    shrinkWrap: true,
+                    itemCount: snapshot.data!.length,
+                    // itemCount: 10,
+                    itemBuilder: (context, index) {
+                      return ExpensesLogItem(
+                        title: snapshot.data![index].title.toString(),
+                        desc: snapshot.data![index].desc.toString(),
+                        date: snapshot.data![index].date.toString(),
+                        index: index,
+                        screenUtil: screenUtil,
+                      );
+                    },
+                  );
+                } else {
+                  return Center(
+                    child: Container(
+                      height: 50,
+                      width: 50,
+                      child: CircularProgressIndicator(),
+                    ),
+                  );
+                }
+              }),
         ),
       ),
       floatingActionButton: FloatingActionButton.extended(
