@@ -12,7 +12,7 @@ class DBProvider {
   static Database? _database;
 
   Future<Database> get database async {
-    if (_database == null) {
+    if (_database != null) {
       return _database!;
     }
 
@@ -34,7 +34,7 @@ class DBProvider {
       onOpen: (db) {},
       onCreate: (db, version) async {
         await db.execute("CREATE TABLE expense2 ("
-            "id INTEGER PRIMARY KEY,"
+            "id INTEGER PRIMARY KEY AUTOINCREMENT,"
             "title TEXT,"
             "desc TEXT,"
             "date DATETIME,"
