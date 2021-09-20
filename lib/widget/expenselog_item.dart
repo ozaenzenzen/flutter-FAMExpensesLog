@@ -7,12 +7,19 @@ import 'package:google_fonts/google_fonts.dart';
 class ExpensesLogItem extends StatelessWidget {
   const ExpensesLogItem({
     Key? key,
+    required this.title,
     required this.index,
+    required this.date,
     required this.screenUtil,
+    required this.desc,
   }) : super(key: key);
 
   final ScreenUtil screenUtil;
   final int index;
+
+  final String title;
+  final String desc;
+  final String date;
 
   @override
   Widget build(BuildContext context) {
@@ -58,6 +65,7 @@ class ExpensesLogItem extends StatelessWidget {
                   children: [
                     Text(
                       "${FAMStrings.lorem_ipsum_title} $index",
+                      // "${FAMStrings.lorem_ipsum_title} $index",
                       // "Judul $index",
                       softWrap: true,
                       style: GoogleFonts.quicksand(
