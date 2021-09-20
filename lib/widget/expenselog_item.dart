@@ -64,7 +64,7 @@ class ExpensesLogItem extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
-                      "${FAMStrings.lorem_ipsum_title} $index",
+                      "$title $index",
                       // "${FAMStrings.lorem_ipsum_title} $index",
                       // "Judul $index",
                       softWrap: true,
@@ -78,7 +78,8 @@ class ExpensesLogItem extends StatelessWidget {
                       height: screenUtil.setHeight(5),
                     ),
                     Text(
-                      "${FAMStrings.lorem_ipsum_desc}",
+                      "$desc",
+                      // "${FAMStrings.lorem_ipsum_desc}",
                       // "Description",
                       softWrap: true,
                       maxLines: 4,
