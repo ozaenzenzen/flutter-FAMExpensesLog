@@ -63,7 +63,8 @@ class ExpensesLogItem extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
-                      "$title $index",
+                      "$title",
+                      // "$title $index",
                       // "${FAMStrings.lorem_ipsum_title} $index",
                       // "Judul $index",
                       softWrap: true,
@@ -86,6 +87,22 @@ class ExpensesLogItem extends StatelessWidget {
                       style: GoogleFonts.quicksand(
                         color: Colors.black,
                         fontSize: screenUtil.setSp(12),
+                        fontWeight: FontWeight.w600,
+                      ),
+                    ),
+                    SizedBox(
+                      height: screenUtil.setHeight(15),
+                    ),
+                    Text(
+                      "$date",
+                      // "${FAMStrings.lorem_ipsum_desc}",
+                      // "Description",
+                      softWrap: true,
+                      maxLines: 4,
+                      overflow: TextOverflow.ellipsis,
+                      style: GoogleFonts.quicksand(
+                        color: Colors.black,
+                        fontSize: screenUtil.setSp(10),
                         fontWeight: FontWeight.w600,
                       ),
                     ),
