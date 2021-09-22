@@ -49,8 +49,9 @@ class _MainPageState extends State<MainPage> {
           ),
           child: FutureBuilder(
               future: DBProvider.dbProvider.selectAllData(),
-              builder: (BuildContext context, AsyncSnapshot<List<ExpenseModel>> snapshot) {
-                print(snapshot.data);
+              builder: (BuildContext context,
+                  AsyncSnapshot<List<ExpenseModel>> snapshot) {
+                // print(snapshot.data);
                 if (snapshot.hasData) {
                   return ListView.builder(
                     physics: ScrollPhysics(),
@@ -59,6 +60,7 @@ class _MainPageState extends State<MainPage> {
                     // itemCount: 10,
                     itemBuilder: (context, index) {
                       return ExpensesLogItem(
+                        id: snapshot.data![index].id.toString(),
                         title: snapshot.data![index].title.toString(),
                         desc: snapshot.data![index].desc.toString(),
                         date: snapshot.data![index].date.toString(),
@@ -95,6 +97,7 @@ class _MainPageState extends State<MainPage> {
         onPressed: () {
           Get.to(
             () => AddPage(),
+            arguments: {'type': 'Add'},
           );
         },
       ),
