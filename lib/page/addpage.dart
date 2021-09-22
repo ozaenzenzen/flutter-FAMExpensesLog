@@ -21,8 +21,18 @@ class _AddPageState extends State<AddPage> {
   TextEditingController descController = TextEditingController();
   TextEditingController dateController = TextEditingController();
 
+  dynamic data = Get.arguments;
+
   @override
   Widget build(BuildContext context) {
+    // print(data);
+    // print(data['type']);
+    if (data['type'] == 'Edit') {
+      titleController.text = data['title'];
+      descController.text = data['desc'];
+      dateController.text = data['date'];
+    }
+
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.red[800],
@@ -89,6 +99,7 @@ class _AddPageState extends State<AddPage> {
                   height: screenUtil.setHeight(5),
                 ),
                 TextField(
+                  maxLines: 4,
                   controller: descController,
                   decoration: InputDecoration(
                     labelText: "Expense Desc",
@@ -168,32 +179,23 @@ class _AddPageState extends State<AddPage> {
                   ),
                 ),
                 onPressed: () async {
-                  var expenseModel = ExpenseModel(
-                    title: titleController.text,
-                    desc: descController.text,
-                    date: dateController.text,
-                  );
+                  if (data['type'] == 'Add') {
+                    var expenseModel = ExpenseModel(
+                      title: titleController.text,
+                      desc: descController.text,
+                      date: dateController.text,
+                    );
 
-                  await DBProvider.dbProvider.insertData(expenseModel);
+                    await DBProvider.dbProvider.insertData(expenseModel);
 
-                  Get.to(() => MainPage(), transition: Transition.leftToRight);
-
-                  // if (expenseModel == null) {
-                  //   // tambah data
-                  //   expenseModel = ExpenseModel(
-                  //     title: titleController.text,
-                  //     desc: descController.text,
-                  //     date: dateController.text,
-                  //   );
-                  // } else {
-                  //   // ubah data
-                  //   expenseModel.title = titleController.text;
-                  //   expenseModel.desc = descController.text;
-                  //   expenseModel.date = dateController.text;
-                  // }
+                    Get.to(() => MainPage(),
+                        transition: Transition.leftToRight);
+                  } else {
+                    //
+                  }
                 },
                 child: Text(
-                  "Add Log!",
+                  (data['type'] == 'Add') ? "Add Log!" : "Update Log!",
                   style: GoogleFonts.quicksand(
                     color: Colors.white,
                     fontSize: screenUtil.setSp(15),
