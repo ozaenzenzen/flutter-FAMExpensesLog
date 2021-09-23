@@ -59,13 +59,36 @@ class _MainPageState extends State<MainPage> {
                     itemCount: snapshot.data!.length,
                     // itemCount: 10,
                     itemBuilder: (context, index) {
-                      return ExpensesLogItem(
-                        id: snapshot.data![index].id.toString(),
-                        title: snapshot.data![index].title.toString(),
-                        desc: snapshot.data![index].desc.toString(),
-                        date: snapshot.data![index].date.toString(),
-                        index: index,
-                        screenUtil: screenUtil,
+                      return Dismissible(
+                        key: UniqueKey(),
+                        background: Container(
+                          padding: EdgeInsets.symmetric(
+                            horizontal: screenUtil.setWidth(15),
+                          ),
+                          alignment: Alignment.centerLeft,
+                          child: Text(
+                            "Delete",
+                            style: GoogleFonts.poppins(
+                              fontSize: screenUtil.setSp(25),
+                              fontWeight: FontWeight.w500,
+                              color: Colors.white,
+                            ),
+                          ),
+                          color: Colors.red,
+                        ),
+                        // onDismissed: (direction) {
+                        //   DBProvider.dbProvider.deleteData(
+                        //     int.parse(snapshot.data![index].id.toString()),
+                        //   );
+                        // },
+                        child: ExpensesLogItem(
+                          id: snapshot.data![index].id.toString(),
+                          title: snapshot.data![index].title.toString(),
+                          desc: snapshot.data![index].desc.toString(),
+                          date: snapshot.data![index].date.toString(),
+                          index: index,
+                          screenUtil: screenUtil,
+                        ),
                       );
                     },
                   );
