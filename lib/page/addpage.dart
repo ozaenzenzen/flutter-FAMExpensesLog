@@ -22,11 +22,15 @@ class _AddPageState extends State<AddPage> {
   TextEditingController dateController = TextEditingController();
 
   dynamic data = Get.arguments;
-
   @override
   Widget build(BuildContext context) {
+    var id = data['id'];
+    var title = data['title'];
+    var desc = data['desc'];
+    var date = data['date'];
     // print(data);
     // print(data['type']);
+    
     if (data['type'] == 'Edit') {
       titleController.text = data['title'];
       descController.text = data['desc'];
@@ -46,165 +50,177 @@ class _AddPageState extends State<AddPage> {
           ),
         ),
       ),
-      body: Container(
-        margin: EdgeInsets.symmetric(
-          horizontal: screenUtil.setWidth(20),
-          vertical: screenUtil.setHeight(20),
-        ),
-        child: Column(
-          children: [
-            Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text(
-                  "Expense Title",
-                  style: GoogleFonts.quicksand(
-                    color: Colors.black,
-                    fontSize: screenUtil.setSp(12),
-                    fontWeight: FontWeight.w500,
-                  ),
-                ),
-                SizedBox(
-                  height: screenUtil.setHeight(5),
-                ),
-                TextField(
-                  controller: titleController,
-                  decoration: InputDecoration(
-                    labelText: "Expense Title",
-                    labelStyle: GoogleFonts.quicksand(
-                      color: Colors.grey,
+      body: SingleChildScrollView(
+        child: Container(
+          margin: EdgeInsets.symmetric(
+            horizontal: screenUtil.setWidth(20),
+            vertical: screenUtil.setHeight(20),
+          ),
+          child: Column(
+            children: [
+              Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    "Expense Title",
+                    style: GoogleFonts.quicksand(
+                      color: Colors.black,
                       fontSize: screenUtil.setSp(12),
                       fontWeight: FontWeight.w500,
                     ),
-                    border: OutlineInputBorder(),
                   ),
-                ),
-              ],
-            ),
-            SizedBox(
-              height: screenUtil.setHeight(15),
-            ),
-            Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text(
-                  "Expense Desc",
-                  style: GoogleFonts.quicksand(
-                    color: Colors.black,
-                    fontSize: screenUtil.setSp(12),
-                    fontWeight: FontWeight.w500,
+                  SizedBox(
+                    height: screenUtil.setHeight(5),
                   ),
-                ),
-                SizedBox(
-                  height: screenUtil.setHeight(5),
-                ),
-                TextField(
-                  maxLines: 4,
-                  controller: descController,
-                  decoration: InputDecoration(
-                    labelText: "Expense Desc",
-                    labelStyle: GoogleFonts.quicksand(
-                      color: Colors.grey,
+                  TextField(
+                    controller: titleController,
+                    decoration: InputDecoration(
+                      labelText: "Expense Title",
+                      labelStyle: GoogleFonts.quicksand(
+                        color: Colors.grey,
+                        fontSize: screenUtil.setSp(12),
+                        fontWeight: FontWeight.w500,
+                      ),
+                      border: OutlineInputBorder(),
+                    ),
+                  ),
+                ],
+              ),
+              SizedBox(
+                height: screenUtil.setHeight(15),
+              ),
+              Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    "Expense Desc",
+                    style: GoogleFonts.quicksand(
+                      color: Colors.black,
                       fontSize: screenUtil.setSp(12),
                       fontWeight: FontWeight.w500,
                     ),
-                    border: OutlineInputBorder(),
                   ),
-                ),
-              ],
-            ),
-            SizedBox(
-              height: screenUtil.setHeight(15),
-            ),
-            Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text(
-                  "Date Time",
-                  style: GoogleFonts.quicksand(
-                    color: Colors.black,
-                    fontSize: screenUtil.setSp(12),
-                    fontWeight: FontWeight.w500,
+                  SizedBox(
+                    height: screenUtil.setHeight(5),
                   ),
-                ),
-                SizedBox(
-                  height: screenUtil.setHeight(5),
-                ),
-                GestureDetector(
-                  onTap: () {
-                    setState(() {
-                      showDatePicker(
-                        context: context,
-                        initialDate: DateTime.now(),
-                        firstDate: DateTime(2019, 1),
-                        lastDate: DateTime(2021, 12),
-                      ).then((value) {
-                        dateController.text =
-                            DateFormat('EEEE, dd MMMM yyyy').format(value!);
+                  TextField(
+                    maxLines: 4,
+                    controller: descController,
+                    decoration: InputDecoration(
+                      labelText: "Expense Desc",
+                      labelStyle: GoogleFonts.quicksand(
+                        color: Colors.grey,
+                        fontSize: screenUtil.setSp(12),
+                        fontWeight: FontWeight.w500,
+                      ),
+                      border: OutlineInputBorder(),
+                    ),
+                  ),
+                ],
+              ),
+              SizedBox(
+                height: screenUtil.setHeight(15),
+              ),
+              Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    "Date Time",
+                    style: GoogleFonts.quicksand(
+                      color: Colors.black,
+                      fontSize: screenUtil.setSp(12),
+                      fontWeight: FontWeight.w500,
+                    ),
+                  ),
+                  SizedBox(
+                    height: screenUtil.setHeight(5),
+                  ),
+                  GestureDetector(
+                    onTap: () {
+                      setState(() {
+                        showDatePicker(
+                          context: context,
+                          initialDate: DateTime.now(),
+                          firstDate: DateTime(2019, 1),
+                          lastDate: DateTime(2021, 12),
+                        ).then((value) {
+                          dateController.text =
+                              DateFormat('EEEE, dd MMMM yyyy').format(value!);
+                        });
                       });
-                    });
-                  },
-                  child: AbsorbPointer(
-                    child: TextField(
-                      controller: dateController,
-                      decoration: InputDecoration(
-                        suffixIcon: Icon(
-                          Icons.calendar_today_rounded,
-                          size: screenUtil.setSp(20),
+                    },
+                    child: AbsorbPointer(
+                      child: TextField(
+                        controller: dateController,
+                        decoration: InputDecoration(
+                          suffixIcon: Icon(
+                            Icons.calendar_today_rounded,
+                            size: screenUtil.setSp(20),
+                          ),
+                          labelText: "Date Time",
+                          labelStyle: GoogleFonts.quicksand(
+                            color: Colors.grey,
+                            fontSize: screenUtil.setSp(12),
+                            fontWeight: FontWeight.w500,
+                          ),
+                          border: OutlineInputBorder(),
                         ),
-                        labelText: "Date Time",
-                        labelStyle: GoogleFonts.quicksand(
-                          color: Colors.grey,
-                          fontSize: screenUtil.setSp(12),
-                          fontWeight: FontWeight.w500,
-                        ),
-                        border: OutlineInputBorder(),
                       ),
                     ),
                   ),
-                ),
-              ],
-            ),
-            SizedBox(
-              height: screenUtil.setHeight(25),
-            ),
-            Align(
-              alignment: Alignment.centerRight,
-              child: ElevatedButton(
-                style: ElevatedButton.styleFrom(
-                  primary: Colors.red.shade800,
-                  minimumSize: Size(
-                    screenUtil.setWidth(100),
-                    screenUtil.setHeight(40),
-                  ),
-                ),
-                onPressed: () async {
-                  if (data['type'] == 'Add') {
-                    var expenseModel = ExpenseModel(
-                      title: titleController.text,
-                      desc: descController.text,
-                      date: dateController.text,
-                    );
-
-                    await DBProvider.dbProvider.insertData(expenseModel);
-
-                    Get.to(() => MainPage(),
-                        transition: Transition.leftToRight);
-                  } else {
-                    //
-                  }
-                },
-                child: Text(
-                  (data['type'] == 'Add') ? "Add Log!" : "Update Log!",
-                  style: GoogleFonts.quicksand(
-                    color: Colors.white,
-                    fontSize: screenUtil.setSp(15),
-                    fontWeight: FontWeight.w700,
-                  ),
-                ),
+                ],
               ),
-            )
-          ],
+              SizedBox(
+                height: screenUtil.setHeight(25),
+              ),
+              Align(
+                alignment: Alignment.centerRight,
+                child: ElevatedButton(
+                  style: ElevatedButton.styleFrom(
+                    primary: Colors.red.shade800,
+                    minimumSize: Size(
+                      screenUtil.setWidth(100),
+                      screenUtil.setHeight(40),
+                    ),
+                  ),
+                  onPressed: () async {
+                    if (data['type'] == 'Add') {
+                      var expenseModel = ExpenseModel(
+                        title: titleController.text,
+                        desc: descController.text,
+                        date: dateController.text,
+                      );
+      
+                      await DBProvider.dbProvider.insertData(expenseModel);
+      
+                      Get.to(() => MainPage(),
+                          transition: Transition.leftToRight);
+                    } else {
+                      var expenseModel = ExpenseModel(
+                        id: id,
+                        title: title,
+                        desc: desc,
+                        date: date,
+                      );
+      
+                      await DBProvider.dbProvider.updateData(expenseModel);
+      
+                      Get.to(() => MainPage(),
+                          transition: Transition.leftToRight);
+                    }
+                  },
+                  child: Text(
+                    (data['type'] == 'Add') ? "Add Log!" : "Update Log!",
+                    style: GoogleFonts.quicksand(
+                      color: Colors.white,
+                      fontSize: screenUtil.setSp(15),
+                      fontWeight: FontWeight.w700,
+                    ),
+                  ),
+                ),
+              )
+            ],
+          ),
         ),
       ),
     );
