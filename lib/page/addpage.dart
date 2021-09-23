@@ -25,12 +25,12 @@ class _AddPageState extends State<AddPage> {
   @override
   Widget build(BuildContext context) {
     var id = data['id'];
-    var title = data['title'];
-    var desc = data['desc'];
-    var date = data['date'];
+    // var title = data['title'];
+    // var desc = data['desc'];
+    // var date = data['date'];
     // print(data);
     // print(data['type']);
-    
+
     if (data['type'] == 'Edit') {
       titleController.text = data['title'];
       descController.text = data['desc'];
@@ -42,7 +42,7 @@ class _AddPageState extends State<AddPage> {
         backgroundColor: Colors.red[800],
         centerTitle: true,
         title: Text(
-          "Add Log Page",
+          (data['type'] == 'Add') ? "Add Log Page" : "Update Log Page",
           style: GoogleFonts.quicksand(
             color: Colors.white,
             fontSize: screenUtil.setSp(18),
@@ -190,21 +190,21 @@ class _AddPageState extends State<AddPage> {
                         desc: descController.text,
                         date: dateController.text,
                       );
-      
+
                       await DBProvider.dbProvider.insertData(expenseModel);
-      
+
                       Get.to(() => MainPage(),
                           transition: Transition.leftToRight);
                     } else {
                       var expenseModel = ExpenseModel(
-                        id: id,
-                        title: title,
-                        desc: desc,
-                        date: date,
+                        id: int.parse(id),
+                        title: titleController.text,
+                        desc: descController.text,
+                        date: dateController.text,
                       );
-      
+
                       await DBProvider.dbProvider.updateData(expenseModel);
-      
+
                       Get.to(() => MainPage(),
                           transition: Transition.leftToRight);
                     }
