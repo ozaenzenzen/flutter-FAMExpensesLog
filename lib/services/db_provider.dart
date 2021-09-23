@@ -72,8 +72,12 @@ class DBProvider {
 
   updateData(ExpenseModel expenseModel) async {
     final db = await database;
-    var res = await db.update("expense2", expenseModel.toJson(),
-        where: "id = ?", whereArgs: [expenseModel.id]);
+    var res = await db.update(
+      "expense2",
+      expenseModel.toJson(),
+      where: "id = ?",
+      whereArgs: [expenseModel.id],
+    );
     return res;
   }
 
