@@ -88,6 +88,8 @@ class _ExpensesLogItemState extends State<ExpensesLogItem> {
                         // "$title $index",
                         // "${FAMStrings.lorem_ipsum_title} $index",
                         // "Judul $index",
+                        maxLines: 2,
+                        overflow: TextOverflow.ellipsis,
                         softWrap: true,
                         style: GoogleFonts.quicksand(
                           color: Colors.black,
