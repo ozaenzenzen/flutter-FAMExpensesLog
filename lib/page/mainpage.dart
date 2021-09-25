@@ -23,11 +23,13 @@ class _MainPageState extends State<MainPage> {
   ScreenUtil screenUtil = ScreenUtil();
   FAMStrings famStrings = FAMStrings();
 
+  Future? data;
+
   @override
   Widget build(BuildContext context) {
-    if (expenseList == null) {
-      expenseList = <ExpenseModel>[];
-    }
+    // if (expenseList == null) {
+    //   expenseList = <ExpenseModel>[];
+    // }
     return Scaffold(
       appBar: AppBar(
         elevation: 0,
@@ -44,7 +46,8 @@ class _MainPageState extends State<MainPage> {
       ),
       body: SingleChildScrollView(
         child: Container(
-          margin: EdgeInsets.symmetric(
+          padding: EdgeInsets.symmetric(
+            vertical: screenUtil.setHeight(5),
             horizontal: screenUtil.setWidth(20),
           ),
           child: FutureBuilder(
