@@ -50,6 +50,8 @@ class _MainPageState extends State<MainPage> {
             vertical: screenUtil.setHeight(5),
             horizontal: screenUtil.setWidth(20),
           ),
+          // child: StreamBuilder<List>(
+          //     stream: DBProvider.dbProvider.streamData(),
           child: FutureBuilder(
               future: DBProvider.dbProvider.selectAllData(),
               builder: (BuildContext context,
