@@ -191,10 +191,12 @@ class _AddPageState extends State<AddPage> {
                         date: dateController.text,
                       );
 
-                      await DBProvider.dbProvider.insertData(expenseModel);
-
-                      Get.to(() => MainPage(),
-                          transition: Transition.leftToRight);
+                      setState(() {
+                        DBProvider.dbProvider
+                            .insertData(expenseModel)
+                            .whenComplete(() => Get.back());
+                        // await DBProvider.dbProvider.insertData(expenseModel).whenComplete(() => Get.back());
+                      });
                     } else {
                       var expenseModel = ExpenseModel(
                         id: int.parse(id),
@@ -203,10 +205,14 @@ class _AddPageState extends State<AddPage> {
                         date: dateController.text,
                       );
 
-                      await DBProvider.dbProvider.updateData(expenseModel);
+                      setState(() {
+                        DBProvider.dbProvider
+                            .updateData(expenseModel)
+                            .whenComplete(() => Get.back());
+                      });
 
-                      Get.to(() => MainPage(),
-                          transition: Transition.leftToRight);
+                      // Get.to(() => MainPage(),
+                      //     transition: Transition.leftToRight);
                     }
                   },
                   child: Text(
