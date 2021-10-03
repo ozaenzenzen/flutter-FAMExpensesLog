@@ -50,7 +50,7 @@ class DBProvider {
     return res;
   }
 
-  insertData(ExpenseModel expenseModel) async {
+  Future insertData(ExpenseModel expenseModel) async {
     final db = await database;
     var res = await db.insert("expense2", expenseModel.toJson());
     return res;
@@ -70,7 +70,11 @@ class DBProvider {
     return dataAll;
   }
 
-  updateData(ExpenseModel expenseModel) async {
+  Stream streamData(){
+    return selectAllData().asStream();
+  }
+
+  Future updateData(ExpenseModel expenseModel) async {
     final db = await database;
     var res = await db.update(
       "expense2",
