@@ -208,11 +208,15 @@ class _AddPageState extends State<AddPage> {
                       setState(() {
                         DBProvider.dbProvider
                             .updateData(expenseModel)
-                            .whenComplete(() => Get.back());
-                      });
+                            .whenComplete(() {
+                          // DBProvider.dbProvider.streamData();
+                          // DBProvider.dbProvider.selectAllData();
 
-                      // Get.to(() => MainPage(),
-                      //     transition: Transition.leftToRight);
+                          return Get.back();
+                        });
+                      });
+                      // DBProvider.dbProvider.updateData(expenseModel);
+                      // Get.offAll(() => MainPage(),transition: Transition.leftToRight);
                     }
                   },
                   child: Text(
