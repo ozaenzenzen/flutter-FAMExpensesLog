@@ -67,11 +67,18 @@ class DBProvider {
     var res = await db.query("expense2");
     List<ExpenseModel> dataAll =
         res.isNotEmpty ? res.map((e) => ExpenseModel.fromMap(e)).toList() : [];
+    // await Future.delayed(Duration(seconds: 1));
     return dataAll;
   }
 
-  Stream streamData(){
-    return selectAllData().asStream();
+  Stream<List<ExpenseModel>> streamData() {
+    // await Future.delayed(Duration(seconds: 1));
+    // yield* selectAllData().asStream();
+    return Stream.periodic(Duration(seconds: 1)).asyncMap((event) => selectAllData());
+
+    // return Stream.fromFuture(selectAllData());
+
+    //  return selectAllData().asStream();
   }
 
   Future updateData(ExpenseModel expenseModel) async {
