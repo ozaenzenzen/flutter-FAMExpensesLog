@@ -172,73 +172,104 @@ class _AddPageState extends State<AddPage> {
               SizedBox(
                 height: screenUtil.setHeight(25),
               ),
-              Align(
-                alignment: Alignment.centerRight,
-                child: ElevatedButton(
-                  style: ElevatedButton.styleFrom(
-                    primary: Colors.red.shade800,
-                    minimumSize: Size(
-                      screenUtil.setWidth(100),
-                      screenUtil.setHeight(40),
-                    ),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.end,
+                children: [
+                  (data['type'] == 'Add')
+                      ? Container()
+                      : ElevatedButton(
+                          style: ElevatedButton.styleFrom(
+                            primary: Colors.red.shade800,
+                            minimumSize: Size(
+                              screenUtil.setWidth(100),
+                              screenUtil.setHeight(40),
+                            ),
+                          ),
+                          onPressed: () async {
+                            setState(() {
+                              DBProvider.dbProvider
+                                  .deleteData(int.parse(id))
+                                  .whenComplete(() => Get.back());
+                            });
+                          },
+                          child: Text(
+                            "Delete Log!",
+                            style: GoogleFonts.quicksand(
+                              color: Colors.white,
+                              fontSize: screenUtil.setSp(15),
+                              fontWeight: FontWeight.w700,
+                            ),
+                          ),
+                        ),
+                  SizedBox(
+                    width: screenUtil.setWidth(20),
                   ),
-                  onPressed: () async {
-                    if (data['type'] == 'Add') {
-                      if (titleController.text.isEmpty ||
-                          descController.text.isEmpty ||
-                          dateController.text.isEmpty) {
-                        var expenseModel = ExpenseModel(
-                          title: "",
-                          desc: "",
-                          date: "",
-                        );
-                        setState(() {
-                          DBProvider.dbProvider
-                              .insertData(expenseModel)
-                              .whenComplete(() => Get.back());
-                          // await DBProvider.dbProvider.insertData(expenseModel).whenComplete(() => Get.back());
-                        });
+                  ElevatedButton(
+                    style: ElevatedButton.styleFrom(
+                      primary: Colors.red.shade800,
+                      minimumSize: Size(
+                        screenUtil.setWidth(100),
+                        screenUtil.setHeight(40),
+                      ),
+                    ),
+                    onPressed: () async {
+                      if (data['type'] == 'Add') {
+                        if (titleController.text.isEmpty ||
+                            descController.text.isEmpty ||
+                            dateController.text.isEmpty) {
+                          var expenseModel = ExpenseModel(
+                            title: "",
+                            desc: "",
+                            date: "",
+                          );
+                          setState(() {
+                            DBProvider.dbProvider
+                                .insertData(expenseModel)
+                                .whenComplete(() => Get.back());
+                            // await DBProvider.dbProvider.insertData(expenseModel).whenComplete(() => Get.back());
+                          });
+                        } else {
+                          var expenseModel = ExpenseModel(
+                            title: titleController.text,
+                            desc: descController.text,
+                            date: dateController.text,
+                          );
+                          setState(() {
+                            DBProvider.dbProvider
+                                .insertData(expenseModel)
+                                .whenComplete(() => Get.back());
+                            // await DBProvider.dbProvider.insertData(expenseModel).whenComplete(() => Get.back());
+                          });
+                        }
                       } else {
                         var expenseModel = ExpenseModel(
+                          id: int.parse(id),
                           title: titleController.text,
                           desc: descController.text,
                           date: dateController.text,
                         );
+
                         setState(() {
                           DBProvider.dbProvider
-                              .insertData(expenseModel)
-                              .whenComplete(() => Get.back());
-                          // await DBProvider.dbProvider.insertData(expenseModel).whenComplete(() => Get.back());
+                              .updateData(expenseModel)
+                              .whenComplete(() {
+                            return Get.back();
+                          });
                         });
+                        // DBProvider.dbProvider.updateData(expenseModel);
+                        // Get.offAll(() => MainPage(),transition: Transition.leftToRight);
                       }
-                    } else {
-                      var expenseModel = ExpenseModel(
-                        id: int.parse(id),
-                        title: titleController.text,
-                        desc: descController.text,
-                        date: dateController.text,
-                      );
-
-                      setState(() {
-                        DBProvider.dbProvider
-                            .updateData(expenseModel)
-                            .whenComplete(() {
-                          return Get.back();
-                        });
-                      });
-                      // DBProvider.dbProvider.updateData(expenseModel);
-                      // Get.offAll(() => MainPage(),transition: Transition.leftToRight);
-                    }
-                  },
-                  child: Text(
-                    (data['type'] == 'Add') ? "Add Log!" : "Update Log!",
-                    style: GoogleFonts.quicksand(
-                      color: Colors.white,
-                      fontSize: screenUtil.setSp(15),
-                      fontWeight: FontWeight.w700,
+                    },
+                    child: Text(
+                      (data['type'] == 'Add') ? "Add Log!" : "Update Log!",
+                      style: GoogleFonts.quicksand(
+                        color: Colors.white,
+                        fontSize: screenUtil.setSp(15),
+                        fontWeight: FontWeight.w700,
+                      ),
                     ),
                   ),
-                ),
+                ],
               )
             ],
           ),
