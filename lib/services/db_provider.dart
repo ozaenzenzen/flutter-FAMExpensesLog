@@ -92,7 +92,7 @@ class DBProvider {
     return res;
   }
 
-  deleteData(int id) async {
+  Future deleteData(int id) async {
     final db = await database;
     db.delete("expense2", where: "id = ?", whereArgs: [id]);
   }
