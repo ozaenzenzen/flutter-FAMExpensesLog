@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_fam_expenseslog/model/expense_model.dart';
-import 'package:flutter_fam_expenseslog/page/mainpage.dart';
 import 'package:flutter_fam_expenseslog/services/db_provider.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
@@ -185,18 +184,33 @@ class _AddPageState extends State<AddPage> {
                   ),
                   onPressed: () async {
                     if (data['type'] == 'Add') {
-                      var expenseModel = ExpenseModel(
-                        title: titleController.text,
-                        desc: descController.text,
-                        date: dateController.text,
-                      );
-
-                      setState(() {
-                        DBProvider.dbProvider
-                            .insertData(expenseModel)
-                            .whenComplete(() => Get.back());
-                        // await DBProvider.dbProvider.insertData(expenseModel).whenComplete(() => Get.back());
-                      });
+                      if (titleController.text.isEmpty ||
+                          descController.text.isEmpty ||
+                          dateController.text.isEmpty) {
+                        var expenseModel = ExpenseModel(
+                          title: "",
+                          desc: "",
+                          date: "",
+                        );
+                        setState(() {
+                          DBProvider.dbProvider
+                              .insertData(expenseModel)
+                              .whenComplete(() => Get.back());
+                          // await DBProvider.dbProvider.insertData(expenseModel).whenComplete(() => Get.back());
+                        });
+                      } else {
+                        var expenseModel = ExpenseModel(
+                          title: titleController.text,
+                          desc: descController.text,
+                          date: dateController.text,
+                        );
+                        setState(() {
+                          DBProvider.dbProvider
+                              .insertData(expenseModel)
+                              .whenComplete(() => Get.back());
+                          // await DBProvider.dbProvider.insertData(expenseModel).whenComplete(() => Get.back());
+                        });
+                      }
                     } else {
                       var expenseModel = ExpenseModel(
                         id: int.parse(id),
@@ -209,9 +223,6 @@ class _AddPageState extends State<AddPage> {
                         DBProvider.dbProvider
                             .updateData(expenseModel)
                             .whenComplete(() {
-                          // DBProvider.dbProvider.streamData();
-                          // DBProvider.dbProvider.selectAllData();
-
                           return Get.back();
                         });
                       });
