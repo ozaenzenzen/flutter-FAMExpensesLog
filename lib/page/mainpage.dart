@@ -52,8 +52,8 @@ class _MainPageState extends State<MainPage> {
           ),
           child: StreamBuilder<List<ExpenseModel>>(
               stream: DBProvider.dbProvider.streamData(),
-          // child: FutureBuilder(
-          //     future: DBProvider.dbProvider.selectAllData(),
+              // child: FutureBuilder(
+              //     future: DBProvider.dbProvider.selectAllData(),
               builder: (BuildContext context,
                   AsyncSnapshot<List<ExpenseModel>> snapshot) {
                 // print(snapshot.data);
