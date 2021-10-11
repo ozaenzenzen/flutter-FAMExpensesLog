@@ -72,8 +72,6 @@ class DBProvider {
   }
 
   Stream<List<ExpenseModel>> streamData() {
-    // await Future.delayed(Duration(seconds: 1));
-    // yield* selectAllData().asStream();
     return Stream.periodic(Duration(seconds: 1)).asyncMap((event) => selectAllData());
 
     // return Stream.fromFuture(selectAllData());
