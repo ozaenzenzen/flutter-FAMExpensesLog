@@ -67,7 +67,6 @@ class DBProvider {
     var res = await db.query("expense2");
     List<ExpenseModel> dataAll =
         res.isNotEmpty ? res.map((e) => ExpenseModel.fromMap(e)).toList() : [];
-    // await Future.delayed(Duration(seconds: 1));
     return dataAll;
   }
 
