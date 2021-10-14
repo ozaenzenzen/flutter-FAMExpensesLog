@@ -73,10 +73,6 @@ class DBProvider {
 
   Stream<List<ExpenseModel>> streamData() {
     return Stream.periodic(Duration(seconds: 1)).asyncMap((event) => selectAllData());
-
-    // return Stream.fromFuture(selectAllData());
-
-    //  return selectAllData().asStream();
   }
 
   Future updateData(ExpenseModel expenseModel) async {
