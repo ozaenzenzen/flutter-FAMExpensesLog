@@ -27,9 +27,6 @@ class _MainPageState extends State<MainPage> {
 
   @override
   Widget build(BuildContext context) {
-    // if (expenseList == null) {
-    //   expenseList = <ExpenseModel>[];
-    // }
     return Scaffold(
       appBar: AppBar(
         elevation: 0,
@@ -56,13 +53,11 @@ class _MainPageState extends State<MainPage> {
               //     future: DBProvider.dbProvider.selectAllData(),
               builder: (BuildContext context,
                   AsyncSnapshot<List<ExpenseModel>> snapshot) {
-                // print(snapshot.data);
                 if (snapshot.hasData) {
                   return ListView.builder(
                     physics: ScrollPhysics(),
                     shrinkWrap: true,
                     itemCount: snapshot.data!.length,
-                    // itemCount: 10,
                     itemBuilder: (context, index) {
                       return Dismissible(
                         key: UniqueKey(),
@@ -81,11 +76,11 @@ class _MainPageState extends State<MainPage> {
                           ),
                           color: Colors.red,
                         ),
-                        // onDismissed: (direction) {
-                        //   DBProvider.dbProvider.deleteData(
-                        //     int.parse(snapshot.data![index].id.toString()),
-                        //   );
-                        // },
+                        onDismissed: (direction) {
+                          // DBProvider.dbProvider.deleteData(
+                          //   int.parse(snapshot.data![index].id.toString()),
+                          // );
+                        },
                         child: ExpensesLogItem(
                           id: snapshot.data![index].id.toString(),
                           title: snapshot.data![index].title.toString(),
