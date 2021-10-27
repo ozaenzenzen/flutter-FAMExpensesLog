@@ -24,11 +24,6 @@ class _AddPageState extends State<AddPage> {
   @override
   Widget build(BuildContext context) {
     var id = data['id'];
-    // var title = data['title'];
-    // var desc = data['desc'];
-    // var date = data['date'];
-    // print(data);
-    // print(data['type']);
 
     if (data['type'] == 'Edit') {
       titleController.text = data['title'];
@@ -226,7 +221,6 @@ class _AddPageState extends State<AddPage> {
                             DBProvider.dbProvider
                                 .insertData(expenseModel)
                                 .whenComplete(() => Get.back());
-                            // await DBProvider.dbProvider.insertData(expenseModel).whenComplete(() => Get.back());
                           });
                         } else {
                           var expenseModel = ExpenseModel(
@@ -238,7 +232,6 @@ class _AddPageState extends State<AddPage> {
                             DBProvider.dbProvider
                                 .insertData(expenseModel)
                                 .whenComplete(() => Get.back());
-                            // await DBProvider.dbProvider.insertData(expenseModel).whenComplete(() => Get.back());
                           });
                         }
                       } else {
@@ -248,7 +241,6 @@ class _AddPageState extends State<AddPage> {
                           desc: descController.text,
                           date: dateController.text,
                         );
-
                         setState(() {
                           DBProvider.dbProvider
                               .updateData(expenseModel)
@@ -256,8 +248,6 @@ class _AddPageState extends State<AddPage> {
                             return Get.back();
                           });
                         });
-                        // DBProvider.dbProvider.updateData(expenseModel);
-                        // Get.offAll(() => MainPage(),transition: Transition.leftToRight);
                       }
                     },
                     child: Text(
